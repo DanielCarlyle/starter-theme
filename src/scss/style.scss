@@ -1,3 +1,14 @@
 body {
-  background-color: red;
+  background-color: #fff;
+  border: solid 1px red;
+}
+
+
+h1 {
+  color: white;
+}
+
+h1:hover {
+  transition: color 1s ease;
+  border-bottom: solid 1px black;
 }
