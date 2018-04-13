@@ -1,0 +1,19 @@
+{
+  "name": "starter-theme",
+  "version": "1.0.0",
+  "description": "starter theme for BS4, Sass, Gulp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielCarlyle/starter-theme.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DanielCarlyle/starter-theme/issues"
+  },
+  "homepage": "https://github.com/DanielCarlyle/starter-theme#readme"
+}
