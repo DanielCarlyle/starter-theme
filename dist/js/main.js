@@ -17462,7 +17462,7 @@ bootstrap = require('bootstrap');
 mustache = require('mustache');
 
 jQuery(document).ready(function() {
-  alert('hello');
+  alert('hello 123');
 });
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
