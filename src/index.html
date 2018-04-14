@@ -6,9 +6,71 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
-  <h1>----TESTING WORKFLOW 123</h1>
+
+<!--
+<div class="container">
+   <div class="row">
+     <div class="col-md-10 mx-auto">
+       <div id="demo" class="carousel slide" data-ride="carousel">
+
+
+         <ul class="carousel-indicators">
+           <li data-target="#demo" data-slide-to="0" class="active"></li>
+           <li data-target="#demo" data-slide-to="1"></li>
+           <li data-target="#demo" data-slide-to="2"></li>
+         </ul>
+
+
+         <div class="carousel-inner">
+           <div class="carousel-item active">
+             <img src="http://placehold.it/1200x250.jpg" alt="Los Angeles">
+           </div>
+           <div class="carousel-item">
+             <img src="http://placehold.it/1200x250.jpg" alt="Chicago">
+           </div>
+           <div class="carousel-item">
+             <img src="http://placehold.it/1200x250.jpg" alt="New York">
+           </div>
+         </div>
+
+
+         <a class="carousel-control-prev" href="#demo" data-slide="prev">
+           <span class="carousel-control-prev-icon"></span>
+         </a>
+         <a class="carousel-control-next" href="#demo" data-slide="next">
+           <span class="carousel-control-next-icon"></span>
+         </a>
+
+       </div>
+     </div>
+   </div>
+</div>
+-->
+
+
+<div class="container">
+    <div class="row">
+        <div id="gallery" class="gallery">
+
+        </div>
+        <script id="template" type="x-tmpl-mustache">
+            {{#gallery}}
+              <div class="col-sm-6 col-md-4">
+              <figure class="figure">
+              <img src="img/{{image}}">
+                <figcaption class="figure-caption"><h3 class="text-center">{{destiny}}</h3></figcaption>
+              </figure>
+              </div>
+
+            {{/gallery}}
+        </script>
+    </div>
+</div>
+
+
 
 </body>
   <script src="js/main.js"></script>

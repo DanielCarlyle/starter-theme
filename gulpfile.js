@@ -6,17 +6,20 @@ const autoprefixer = require('gulp-autoprefixer');
 var browserify = require('gulp-browserify');
 const clean = require('gulp-clean');
 const concat = require('gulp-concat');
-var merge = require('merge-stream');
+const newer = require('gulp-newer');
+const imagemin = require('gulp-image');
 
 var SOURCEPATHS = {
   sassSource : 'src/scss/*.scss',
   htmlSource : 'src/*html',
-  jsSource : 'src/js/**'
+  jsSource : 'src/js/**',
+  imgSource : 'src/img/**'
 }
 var APPPATH ={
   root: 'dist/',
   css : 'dist/css',
   js: 'dist/js'
+  img: 'app/img'
 }
 
 gulp.task('clean-html', function() {
