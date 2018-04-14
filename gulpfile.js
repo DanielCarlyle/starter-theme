@@ -1,25 +1,29 @@
 var gulp = require('gulp');
-const sass = require('gulp-sass');
-const browserSync = require('browser-sync');
-const reload = browserSync.reload;
-const autoprefixer = require('gulp-autoprefixer');
+var sass = require('gulp-sass');
+var browserSync = require('browser-sync');
+var reload = browserSync.reload;
+var autoprefixer = require('gulp-autoprefixer');
 var browserify = require('gulp-browserify');
-const clean = require('gulp-clean');
-const concat = require('gulp-concat');
-const newer = require('gulp-newer');
-const imagemin = require('gulp-image');
+var clean =require('gulp-clean');
+var concat = require('gulp-concat');
+var merge = require('merge-stream');
+var newer = require('gulp-newer');
+var imagemin = require('gulp-imagemin');
+var injectPartials = require('gulp-inject-partials');
+var minify = require('gulp-minify');
 
 var SOURCEPATHS = {
   sassSource : 'src/scss/*.scss',
   htmlSource : 'src/*html',
+  htmlPartialSource : 'src/partial/*.html',
   jsSource : 'src/js/**',
   imgSource : 'src/img/**'
 }
 var APPPATH ={
   root: 'dist/',
   css : 'dist/css',
-  js: 'dist/js'
-  img: 'app/img'
+  js: 'dist/js',
+  img: 'dist/img'
 }
 
 gulp.task('clean-html', function() {
@@ -41,10 +45,17 @@ sassFiles = gulp.src(SOURCEPATHS.sassSource)
     browsers: ['last 2 versions'],
     cascade: false
     }))
-   .pipe(sass({outputStyle:'compressed'}).on('error', sass.logError))
+   .pipe(sass({outputStyle:'expanded'}).on('error', sass.logError))
    return merge(bootstrapCSS, sassFiles)
        .pipe(concat('app.css'))
        .pipe(gulp.dest(APPPATH.css));
+});
+
+gulp.task('images', function() {
+  return gulp.src(SOURCEPATHS.imgSource)
+    .pipe(newer(APPPATH.img))
+    .pipe(imagemin())
+    .pipe(gulp.dest(APPPATH.img));
 });
 
 gulp.task('scripts', ['clean-scripts'], function () {
@@ -54,10 +65,29 @@ gulp.task('scripts', ['clean-scripts'], function () {
     .pipe(gulp.dest(APPPATH.js))
 });
 
+gulp.task('compress', function () {
+  gulp.src(SOURCEPATHS.jsSource)
+    .pipe(concat('main.js'))
+    .pipe(browserify())
+    .pipe(minify())
+    .pipe(gulp.dest(APPPATH.js))
+});
+
+gulp.task('html', function() {
+   return gulp.src(SOURCEPATHS.htmlSource)
+        .pipe(injectPartials())
+        .pipe(gulp.dest(APPPATH.root))
+});
+
+/*
 gulp.task('copy', ['clean-html'], function() {
   gulp.src(SOURCEPATHS.htmlSource)
       .pipe(gulp.dest(APPPATH.root))
 });
+
+copy task also removed from the watch task below
+
+*/
 
 gulp.task('serve', ['sass'], function() {
   browserSync.init([APPPATH.css + '/*.css', APPPATH.root + '/*.html', APPPATH.js + '/*.js'], {
@@ -67,10 +97,11 @@ gulp.task('serve', ['sass'], function() {
   })
 });
 
-gulp.task('watch', ['serve', 'sass','copy', 'clean-html', 'clean-scripts', 'scripts'], function() {
+gulp.task('watch', ['serve', 'sass', 'clean-html', 'clean-scripts', 'scripts', 'images', 'html'], function() {
   gulp.watch([SOURCEPATHS.sassSource], ['sass']);
-  gulp.watch([SOURCEPATHS.htmlSource], ['copy']);
+  //gulp.watch([SOURCEPATHS.htmlSource], ['copy']);
   gulp.watch([SOURCEPATHS.jsSource], ['scripts']);
+   gulp.watch([SOURCEPATHS.htmlSource, SOURCEPATHS.htmlPartialSource], ['html', 'clean-html']);
 });
 
 gulp.task('default', ['watch']);

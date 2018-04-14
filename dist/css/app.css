@@ -8948,4 +8948,15 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
-body{background-color:florwalwhite}h1{color:white}h1:hover{-webkit-transition:color 1s ease;transition:color 1s ease;border-bottom:solid 1px black}
+body {
+  background-color: #ffffcc;
+}
+
+h1 {
+  color: white;
+}
+
+h1:hover {
+  -webkit-transition: color 1s ease;
+  transition: color 1s ease;
+}
