@@ -1,15 +1,3 @@
-body {
-  background-color: #ffffcc;
-}
-
-h1 {
-  color: white;
-}
-
-h1:hover {
-  transition: color 1s ease;
-}
-
 /*!
  * Bootstrap v4.1.0 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
@@ -8960,3 +8948,11 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+body {
+  background: #ffffff;
+}
+
+h2 {
+  margin: 20px 0;
+  color: #0076A3;
+}
