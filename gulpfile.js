@@ -39,7 +39,18 @@ gulp.task('clean-scripts', function() {
    .pipe(clean());
 });
 
+gulp.task('sass', function(){
+  var bootstrapCSS = gulp.src('./node_modules/bootstrap/dist/css/bootstrap.css');
+  var sassFiles;
 
+
+  sassFiles = gulp.src(SOURCEPATHS.sassSource)
+      .pipe(autoprefixer())
+      .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+      return merge(bootstrapCSS, sassFiles)
+          .pipe(concat('app.css'))
+          .pipe(gulp.dest(APPPATH.css));
+});
 
 gulp.task('images', function() {
   return gulp.src(SOURCEPATHS.imgSource)
